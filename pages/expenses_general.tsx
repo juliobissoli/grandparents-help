@@ -1,6 +1,6 @@
-import { ArrowLeft } from "@phosphor-icons/react";
 import Head from "next/head";
 import Link from "next/link";
+import { ArrowLeft } from "phosphor-react";
 
 export default function Expenses() {
   return (
