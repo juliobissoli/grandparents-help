@@ -3,6 +3,7 @@ import Modal from "@/components/common/modal";
 import TextField from "@/components/common/text_field";
 import ToggleButton from "@/components/common/toggle_button";
 import ExcretaCreateModal from "@/components/excreta/create_modal";
+import api from "@/serve/api";
 import axios from "axios";
 import moment from "moment";
 import Head from "next/head";
@@ -11,30 +12,25 @@ import { ArrowLeft, Divide } from "phosphor-react";
 import { useEffect, useState } from "react";
 
 export default function ExpensesHealth() {
-  const baseUrl =
-    "https://script.google.com/macros/s/AKfycbzO-V9Lp7r9hOyG1bRkS8_Fa8udF82WPtJ4aDgNQIk_W9ysetKRO1FtBs5M7wN4b2q6/exec?action=";
 
   useEffect(() => {
     console.log(currentStatus);
-    if (currentStatus !== "success") {
-      console.log("get");
-      teste();
-    }
+    if (currentStatus !== "success")  loadData();
   });
 
   const [list, setList] = useState([]);
+  
   const [currentStatus, setStatus] = useState("empty");
+  
   const [modalIsVisible, toggleModal] = useState(false);
-  const teste = async () => {
+
+  const loadData = async () => {
     setStatus("loading");
-
-    const res = await fetch(`${baseUrl}getTest`);
-    const data = await res.json();
-    console.log("res => ", data);
-
-    setList(data);
-    setStatus("success");
-    return res;
+    api.get("exec?action=getTest").then((res: any) => {
+      console.log("res => ", res.data);
+      setList(res.data);
+      setStatus("success");
+    });
   };
 
   const handleSave = async (amount: number, type: string) => {
@@ -45,29 +41,12 @@ export default function ExpensesHealth() {
     };
     console.log("vai ataualiza => ", data);
 
-    await axios
-      .post(`${baseUrl}postTest`, data, {
-        headers: {
-          "Content-Type": "text/plain;charset=utf-8",
-        },
-      })
-      .then((res) => {
-        console.log("res => ", res);
-      });
-
-    // await fetch( `${baseUrl}postTest`, {
-    //   method: "POST",
-    //   body: JSON.stringify({
-    //     data,
-    //   }),
-
-    // }).then(
-    //   res =>  {
-    //     res.json().then(
-    //       q => console.log('de certo => ', q)
-    //     )
-    //     teste()}
-    // );
+    api.post('exec?action=postTest', data).then(
+      res => {
+        console.log('deu bom')
+        toggleModal(false)
+      }
+    )
   };
 
   return (

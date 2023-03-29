@@ -1,22 +1,33 @@
 import { useState } from "react";
 import Button from "../common/button";
 import Modal from "../common/modal";
+import Select from "../common/select";
 import TextField from "../common/text_field";
-import ToggleButton from "../common/toggle_button";
 
 interface Props {
   onClose: () => void;
-  onSave: (amount: number, type: string) => void;
+  onSave: (value: number, type: string) => void;
   isLoading: boolean;
 }
 
-const ExcretaCreateModal: React.FC<Props> = ({ onClose, onSave, isLoading = false }: any) => {
+const ExpensesCreateModal: React.FC<Props> = ({
+  onClose,
+  onSave,
+  isLoading = false,
+}: any) => {
   const typesData = [
-    { label: "Urina", value: "urine" },
-    { label: "Fezes", value: "feces" },
+    { label: "Energia", value: "Energia" },
+    { label: "Celular", value: "Celular" },
+    { label: "Água", value: "Água" },
+    { label: "IPTU", value: "IPTU" },
+    { label: "Gás", value: "Gás" },
+    { label: "Transporte", value: "Transporte" },
+    { label: "Outros", value: "Outros" },
+
+    
   ];
 
-  const [typeSelected, setType] = useState("urine");
+  const [typeSelected, setType] = useState("Energia");
   const [amount, setAmount] = useState(0);
 
   return (
@@ -29,7 +40,7 @@ const ExcretaCreateModal: React.FC<Props> = ({ onClose, onSave, isLoading = fals
           <Button
             color="green"
             loading={isLoading}
-            disabled = {isLoading}
+            disabled={isLoading}
             onClick={() => onSave(amount, typeSelected)}
           >
             Adicionar
@@ -37,24 +48,16 @@ const ExcretaCreateModal: React.FC<Props> = ({ onClose, onSave, isLoading = fals
         </div>
       }
     >
-      <ToggleButton
-        title="Tipo"
-        defaultValue="urine"
-        onToggle={(value: string) => {
-          console.log(value);
-          setType(value);
-        }}
+      <Select
         options={typesData}
-      >
-        {" "}
-      </ToggleButton>
+        onSelect={(value: string) => setType(value)}
+      ></Select>
 
       <div className="mt-3">
         <TextField
-          label="Quantidade em ml"
+          label="Valor"
           type="number"
           value={amount.toString()}
-
           onChanged={(value: string) => {
             setAmount(parseInt(value));
           }}
@@ -64,4 +67,4 @@ const ExcretaCreateModal: React.FC<Props> = ({ onClose, onSave, isLoading = fals
   );
 };
 
-export default ExcretaCreateModal;
+export default ExpensesCreateModal;

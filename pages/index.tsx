@@ -4,6 +4,7 @@ import { Inter } from "next/font/google";
 import styles from "@/styles/Home.module.css";
 import { CardSelect } from "@/components/home/cards";
 import Link from "next/link";
+import Excreta from "./excreta";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -18,6 +19,9 @@ export default function Home() {
         <h2 className="text-5xl mt-3">Cuidando dos avos</h2>
 
         <section className="flex mt-12 flex-wrap">
+        <Link href="/excreta" className="w-1/2 p-2">
+            <CardSelect title={"Rejeitos"} emoji={"🥤"}></CardSelect>
+          </Link>
           <Link href="/expenses_general" className="w-1/2 p-2">
             <CardSelect title={"Despesas gerais"} emoji={"💸"}></CardSelect>
           </Link>
