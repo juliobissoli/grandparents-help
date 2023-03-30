@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useEffect, CSSProperties } from "react";
 
 import { X } from "phosphor-react";
 
@@ -6,7 +6,7 @@ interface Props {
   title?: string;
   close: () => void;
   children: React.ReactNode;
-  footer?: Element;
+  footer?: any;
   noHeader?: boolean;
 }
 
@@ -34,7 +34,7 @@ const Modal: React.FC<Props> = ({
   const wrapperRef = useRef(null);
   useOutsideDetect(wrapperRef, close);
 
-  const modalClass = {
+  const modalClass: CSSProperties = {
     position: "fixed",
     top: 0,
     bottom: 0,

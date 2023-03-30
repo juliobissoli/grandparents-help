@@ -4,7 +4,6 @@ import { Inter } from "next/font/google";
 import styles from "@/styles/Home.module.css";
 import { CardSelect } from "@/components/home/cards";
 import Link from "next/link";
-import Excreta from "./excreta";
 
 const inter = Inter({ subsets: ["latin"] });
 

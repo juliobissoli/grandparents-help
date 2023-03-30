@@ -45,9 +45,8 @@ const ExcretaCreateModal: React.FC<Props> = ({ onClose, onSave, isLoading = fals
           setType(value);
         }}
         options={typesData}
-      >
-        {" "}
-      </ToggleButton>
+      />
+      
 
       <div className="mt-3">
         <TextField
