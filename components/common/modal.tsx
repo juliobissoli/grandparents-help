@@ -46,10 +46,10 @@ const Modal: React.FC<Props> = ({
     opacity: 1,
   };
   return (
-    <div style={modalClass}>
+    <div style={modalClass} >
       <div
         ref={wrapperRef}
-        className="bg-white absolute  rounded-[20px] mt-[10vh] min-w-[30vw]"
+        className="bg-white absolute m-2  rounded-[20px] mt-[10vh] min-w-[30vw]"
       >
         {!noHeader ? (
           <header className="flex justify-between py-4 px-8 border-b">

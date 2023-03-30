@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-interface SelectOption {
+export interface  SelectOption {
   label: string;
   value: string;
 }

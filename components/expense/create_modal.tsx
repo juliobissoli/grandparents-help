@@ -1,12 +1,13 @@
 import { useState } from "react";
 import Button from "../common/button";
 import Modal from "../common/modal";
-import Select from "../common/select";
+import Select  from "../common/select";
 import TextField from "../common/text_field";
 
 interface Props {
   onClose: () => void;
   onSave: (value: number, type: string) => void;
+  typesData: Array<any>
   isLoading: boolean;
 }
 
@@ -14,18 +15,9 @@ const ExpensesCreateModal: React.FC<Props> = ({
   onClose,
   onSave,
   isLoading = false,
+  typesData
 }: any) => {
-  const typesData = [
-    { label: "Energia", value: "Energia" },
-    { label: "Celular", value: "Celular" },
-    { label: "Água", value: "Água" },
-    { label: "IPTU", value: "IPTU" },
-    { label: "Gás", value: "Gás" },
-    { label: "Transporte", value: "Transporte" },
-    { label: "Outros", value: "Outros" },
 
-    
-  ];
 
   const [typeSelected, setType] = useState("Energia");
   const [amount, setAmount] = useState(0);
@@ -59,7 +51,7 @@ const ExpensesCreateModal: React.FC<Props> = ({
           type="number"
           value={amount.toString()}
           onChanged={(value: string) => {
-            setAmount(parseInt(value));
+            setAmount(Number.parseFloat(value));
           }}
         ></TextField>
       </div>
