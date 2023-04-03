@@ -92,8 +92,8 @@ export default function Excreta() {
         <section className="mt-12">
           <header className="flex justify-between items-end">
             <div className="flex flex-col justify-end">
-              <span className="text-3xl">🥤</span>
-              <h1 className="text-2xl"> Rejeitos (vovó)</h1>
+              <span className="text-3xl">🚽</span>
+              <h1 className="text-2xl"> Rejeitos (vovô)</h1>
             </div>
             <div>
               <button className="btn-green" onClick={() => toggleModal(true)}>
@@ -123,7 +123,7 @@ export default function Excreta() {
                           {/* {el.registered_by} */}
                           {moment(el.date).format("DD/MMM")}
                         </span>
-                        {el.type === "feces" ? "Fezes 💩" : "Urina 🍶"}{" "}
+                        {el.type === "feces" ? "Fezes 💩" : "Urina 🪣"}{" "}
                       </div>
                       {el.amount} ml
                     </li>
