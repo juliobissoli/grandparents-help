@@ -3,7 +3,7 @@ import React from "react";
 
 interface Props {
   // sulfixClick?: () => void;
-  type: "text" | "password" | "email" | "number" | "time" | "date" | "radio";
+  type: "text" | "password" | "email" | "number" | "time" | "date" | "datetime-local" | "radio";
   placeholder?: string;
   label?: string;
   sulfix?: Element;

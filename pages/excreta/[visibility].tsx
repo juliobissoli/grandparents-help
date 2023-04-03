@@ -39,12 +39,12 @@ export default function Excreta() {
     });
   };
 
-  const handleSave = async (amount: number, type: string) => {
+  const handleSave = async (amount: number, type: string, date: string) => {
     const data = {
-      type: type,
-      amount: amount,
+      type,
+      amount,
+      date,
       registered_by: "--",
-      date: moment().format("YYYY-MM-DD HH:mm"),
     };
 
     toggleLoadingAction(true);
@@ -111,6 +111,7 @@ export default function Excreta() {
             <ul className="m-4">
               {list
                 .filter((item) => item.amount !== "-")
+                .sort((a, b) => moment(b).diff(moment(a), 'days'))
                 .map((el: any, i: number) => {
                   return (
                     <li
@@ -120,7 +121,7 @@ export default function Excreta() {
                       <div>
                         <span className="text-gray-300 mr-2">
                           {/* {el.registered_by} */}
-                          {moment(el.date).format("MMM/DD")}
+                          {moment(el.date).format("DD/MMM")}
                         </span>
                         {el.type === "feces" ? "Fezes 💩" : "Urina 🍶"}{" "}
                       </div>
