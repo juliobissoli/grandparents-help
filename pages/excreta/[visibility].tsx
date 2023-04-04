@@ -44,7 +44,7 @@ export default function Excreta() {
       type,
       amount,
       date,
-      registered_by: "--",
+      registered_by:  localStorage.getItem('name'),
     };
 
     toggleLoadingAction(true);
@@ -111,7 +111,7 @@ export default function Excreta() {
             <ul className="m-4">
               {list
                 .filter((item) => item.amount !== "-")
-                .sort((a, b) => moment(b).diff(moment(a), 'days'))
+                .sort((a, b) => moment(b.date).diff(moment(a.date), 'days'))
                 .map((el: any, i: number) => {
                   return (
                     <li
@@ -124,6 +124,7 @@ export default function Excreta() {
                           {moment(el.date).format("DD/MMM")}
                         </span>
                         {el.type === "feces" ? "Fezes 💩" : "Urina 🪣"}{" "}
+                        <small className="text-zinc-300">({el.registered_by})</small>
                       </div>
                       {el.amount} ml
                     </li>

@@ -35,12 +35,12 @@ export default function HealthExpenses() {
     });
   };
 
-  const handleSave = async (value: number, type: string) => {
+  const handleSave = async (value: number, type: string, date: string) => {
     const data = {
-      type: type,
-      value: value,
-      registered_by: "Julio",
-      date: moment().format("YYYY-MM-DD HH:mm"),
+      type,
+      value,
+      date,
+      registered_by:  localStorage.getItem('name'),
     };
     console.log("vai ataualiza => ", data);
 
@@ -128,7 +128,10 @@ export default function HealthExpenses() {
                   : 0}
               </header>
               <ul>
-                {list.filter(item => item.value !== '-').map((el: any, i: number) => {
+                {list
+                .filter(item => item.value !== '-')
+                .sort((a, b) => moment(b.date).diff(moment(a.date), 'days'))
+                .map((el: any, i: number) => {
                   return (
                     <li
                       key={i}
@@ -141,6 +144,7 @@ export default function HealthExpenses() {
                           {moment(el.date).format("DD/MMM")}{" "}
                         </span>{" "}
                         {el.type}{" "}
+                        <small className="text-zinc-300">({el.registered_by})</small>
                       </div>
                       {el.value.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'})}
                     </li>

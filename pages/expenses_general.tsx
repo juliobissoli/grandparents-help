@@ -29,12 +29,12 @@ export default function GeneralExpenses() {
     });
   };
 
-  const handleSave = async (value: number, type: string) => {
+  const handleSave = async (value: number, type: string, date: string) => {
     const data = {
-      type: type,
-      value: value,
-      registered_by: "Julio",
-      date: moment().format("YYYY-MM-DD HH:mm"),
+      type,
+      value,
+      date,
+      registered_by: localStorage.getItem("name"),
     };
     console.log("vai ataualiza => ", data);
 
@@ -72,7 +72,7 @@ export default function GeneralExpenses() {
               "Gás",
               "Transporte",
               "Outros",
-            ].map(el => ({label: el, value: el}))}
+            ].map((el) => ({ label: el, value: el }))}
             onClose={() => {
               toggleModal(false);
             }}
@@ -125,6 +125,7 @@ export default function GeneralExpenses() {
               <ul>
                 {list
                   .filter((item) => item.value !== "-")
+                  .sort((a, b) => moment(b.date).diff(moment(a.date), "days"))
                   .map((el: any, i: number) => {
                     return (
                       <li
@@ -138,6 +139,7 @@ export default function GeneralExpenses() {
                             {moment(el.date).format("DD/MMM")}{" "}
                           </span>{" "}
                           {el.type}{" "}
+                          <small className="text-zinc-300">({el.registered_by})</small>
                         </div>
                         {el.value.toLocaleString("pt-br", {
                           style: "currency",

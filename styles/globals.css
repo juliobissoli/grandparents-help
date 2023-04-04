@@ -27,3 +27,33 @@ html {
   @apply rounded-lg border border-gray-200 p-2 bg-white;
   height: 40px;
 }
+
+.box-limited {
+  overflow-y: auto;
+  overflow-x: hidden;
+  scrollbar-color: #eee transparent;
+  scrollbar-width: thin !important;
+  
+}
+
+.box-limited::-webkit-scrollbar {
+  width: 4px;
+}
+
+/* Track */
+.box-limited::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+
+/* Handle */
+.box-limited::-webkit-scrollbar-thumb {
+  background: #eee;
+  border-radius: 6px;
+}
+
+/* Handle on hover */
+.box-limited::-webkit-scrollbar-thumb:hover {
+  background: #eee;
+  border-radius: 6px;
+}
